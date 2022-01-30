@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/statvfs.h>
-#include "waybar_json.h"
+#include <waybar_json.h>
 
 unsigned int count_digit_in_number(unsigned int i) {
     unsigned int ret = 1;
@@ -41,8 +41,6 @@ int main(void) {
 
     snprintf(use_str, count_digit+1, "%ld", use);
 
-    //percent = 1;
-
     if (percent < 50) {
         class = good_class;
         class_len = 1;
@@ -56,7 +54,7 @@ int main(void) {
 
     struct Waybar_args args = {
         .text       = use_str,
-        .tooltip    = "",
+        .tooltip    = "false",
         .class      = class,
         .class_len  = class_len,
         .percentage = percent

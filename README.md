@@ -1,6 +1,6 @@
 # Waybar JSON-format generator
 
-C library for generate a JSON-format for the `return-type` `"json"` in waybar conf file.
+C library for generate a JSON-format for the `return-type` `"json"` in waybar configuration file.
 
 > in `waybar-custom(5)` manual page.
 ```man
@@ -27,9 +27,17 @@ FORMAT REPLACEMENTS
        {icon}: An icon from 'format-icons' according to percentage.
 ```
 
+# Dependances
+ - Require [`json-c`](https://github.com/json-c/json-c).
 
 # Using library
 
+Include the header file
+```c
+#include "waybar_json.h"
+```
+
+## Functions
 ```c
 char *waybar_json(struct Waybar_args *);
 ```
@@ -38,7 +46,7 @@ Arguments:
 > `Struct Waybar_args *`: Pointer to a `struct Waybar_args`
 
 Return:
-> `char *`: json format on string
+> `char *`: json format string. /!\ Dont forget to free() this address.
 
 ### `Waybar_args` fields:
  - `char *text`: text to print instead of `{}` in `"format"` key inside config.
@@ -47,29 +55,41 @@ Return:
  - `size_t class_len`: Number of string inside `class` field array.
  - `int percentage`: An value between `0` and `100`.
 
-# Example of waybar config file and style.css to use with the [example.c](example.c).
+# Installation (Linux)
+`git clone https://github.com/ownesis/waybar_json.git`
+`cd waybar_json`
+`mkdir build && cd build`
+`cmake .. && make`
+`sudo make install`
+`sudo ldconfig /usr/local/lib`
+
+# Compiling example (Linux)
+`gcc -o disk_usage example.c -lwaybar_json`
+
+# Example of waybar config file and style.css to use with the [`example.c`](example.c).
+### config
 ```json
-"custom/hddsusage": {
+"custom/diskusage": {
     "format": "{}Go {icon}",
     "format-icons": ["│▁│", "│▃│", "│▅│", "│▇│", "│█│"],
-    "exec": "/home/ownesis/waybar_json/a.out",
+    "exec": "/path/to/disk_usage",
     "return-type": "json",
-    "interval": 10,
+    "interval": 60,
 },
 ```
 
+### style.css
 ```css
-#custom-hddsusage {
+#custom-diskusage {
     color: white;
 }
 
-#custom-hddsusage.caution,
-#custom-hddsusage.warning {
+#custom-diskusage.caution,
+#custom-diskusage.warning {
     color: yellow;
 }
 
-#custom-hddsusage.critical {
+#custom-diskusage.critical {
     color: red;
 }
-
 ```

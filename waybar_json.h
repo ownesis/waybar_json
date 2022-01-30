@@ -1,6 +1,8 @@
 #ifndef __WAYBAR_JSON_H__
 #define __WAYBAR_JSON_H__
 
+#define WJ_TOOLTIP_NONE ""
+
 #define JOBJ_NEW(t, k)                      \
     do {                                    \
         tmp = json_object_new_##t(args->k); \
