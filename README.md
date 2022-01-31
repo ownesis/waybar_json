@@ -30,11 +30,24 @@ FORMAT REPLACEMENTS
 # Dependances
  - Require [`json-c`](https://github.com/json-c/json-c).
 
+# Installation (Linux)
+`git clone https://github.com/ownesis/waybar_json.git`
+
+`cd waybar_json`
+
+`mkdir build && cd build`
+
+`cmake .. && make`
+
+`sudo make install`
+
+`sudo ldconfig /usr/local/lib`
+
 # Using library
 
-Include the header file
+## Include the header file
 ```c
-#include "waybar_json.h"
+#include <waybar_json.h>
 ```
 
 ## Functions
@@ -55,18 +68,10 @@ Return:
  - `size_t class_len`: Number of string inside `class` field array.
  - `int percentage`: An value between `0` and `100`.
 
-# Installation (Linux)
-`git clone https://github.com/ownesis/waybar_json.git`
-`cd waybar_json`
-`mkdir build && cd build`
-`cmake .. && make`
-`sudo make install`
-`sudo ldconfig /usr/local/lib`
-
-# Compiling example (Linux)
+# Compiling example.c
 `gcc -o disk_usage example.c -lwaybar_json`
 
-# Example of waybar config file and style.css to use with the [`example.c`](example.c).
+# Example of waybar config file and style.css to use with the `example.c` code.
 ### config
 ```json
 "custom/diskusage": {
